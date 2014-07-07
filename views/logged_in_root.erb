@@ -1,0 +1,15 @@
+<h2>Welcome, @user[:name]</h2>
+
+<h3>Contacts:</h3>
+<dl>
+  <% @user_contacts.each do |contact_hash| %>
+    <%contact_hash.each do |contact| %>
+      <dt><%=contact[:name]%></dt>
+      <dd><%=contact[:email]%></dd>
+    <% end %>
+  <% end %>
+</dl>
+
+<form method="get" action="/logout">
+  <button>Click here to logout</button>
+</form>

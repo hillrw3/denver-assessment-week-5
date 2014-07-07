@@ -21,7 +21,33 @@ class ContactsApp < Sinatra::Base
   end
 
   get "/" do
-    "Hello week 5"
+    if session[:user]  != []
+      @user = @user_database.find(params[:id])
+      @user_contacts = @contact_database.find_for_user(@user[:id])
+      erb :logged_in_root
+    else
+      erb :root
+    end
+  end
+
+  get '/login' do
+    erb :login
+  end
+
+  post '/login' do
+    active_user = []
+    active_user << @user_database.all.find do |user_hash|
+      params[:username] == user_hash[:username] && params[:password] == user_hash[:password]
+    end
+    if active_user != []
+      session[:user] = active_user[:id]
+      redirect '/'
+    end
+  end
+
+  get '/logout' do
+    session[:user] = []
+    redirect '/'
   end
 
 end
