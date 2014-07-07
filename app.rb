@@ -40,7 +40,7 @@ class ContactsApp < Sinatra::Base
       params[:username] == user_hash[:username] && params[:password] == user_hash[:password]
     end
     if active_user != []
-      session[:user] = active_user[:id]
+      session[:user] = active_user
       redirect '/'
     end
   end

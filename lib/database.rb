@@ -25,7 +25,7 @@ class Database
   end
 
   def offset_id(id)
-    id - 1
+    id.to_i - 1
   end
 
 end
